@@ -1,0 +1,2 @@
+INSERT INTO people (name, message) VALUES ('Varun', 'Hey this is Varun');
+INSERT INTO people (name, message) VALUES ('Joe', 'Hey this is Joe');
