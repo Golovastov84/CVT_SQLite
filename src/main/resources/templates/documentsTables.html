@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document List</title>
+    <script src="/js/jquery-3.4.0.min.js"></script>
+    <script src="/js/document.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<h1>Список людей (<span th:text="${peoplesCount}">0</span>)</h1>
+<a href="/">
+<button id="show-add-people-form">Добавить человека</button>
+</a>
+<br><br>
+<div id="people-list">
+    <div th:each="people : ${peoples}">
+        <a href="#" class="people-link" th:attr="data-id=${people.id}"
+           th:text="${people.lastName + ' ' + people.firstName + ' ' + people.patronymic}"></a>
+        <div  th:text="${people.getPeopleDate()}"></div>
+    </div>
+</div>
+<br><br>
+<div id="document-list">
+    <div th:each="document : ${documents}">
+        <a href="#" class="document-link-doc" th:attr="data-id=${document.id}"
+           th:text="${document.peopleId}"></a>
+    </div>
+</div>
+</body>
+</html>

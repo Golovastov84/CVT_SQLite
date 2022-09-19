@@ -1,7 +1,9 @@
 package main.model;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,10 +34,10 @@ public class People {
 
     private String sex;
 
-    @OneToMany(mappedBy = "people", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Document> documents = new HashSet<>();
+    /*@OneToMany(mappedBy = "peopleId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Document> documents = new HashSet<>();*/
 
-    public void addDocuments(Document document){
+    /*public void addDocument(Document document){
         documents.add(document);
         document.setPeople(this);
     }
@@ -43,7 +45,7 @@ public class People {
     public void removeDocument(Document document){
         documents.remove(document);
         document.setPeople(null);
-    }
+    }*/
 
     public People() {
 //        birthday = LocalDate.of(yearBirthday, monthBirthday, dayBirthday);
@@ -133,5 +135,12 @@ public class People {
         this.sex = sex;
     }
 
+    public String getPeopleDate(){
+        LocalDate localDate = LocalDate.now();
+        Period period = Period.between(localDate, birthday);
+        int diff = Math.abs(period.getYears());
+        String messageAge = "Возраст в годах: ".concat(String.valueOf(diff));
+        return messageAge;
+    }
 
 }

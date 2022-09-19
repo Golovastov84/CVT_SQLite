@@ -21,13 +21,14 @@ public class PeopleController {
     @Autowired
     private PeopleRepository peopleRepository;
 
-    private DocumentRepository documentRepository;
+   /* @Autowired
+    private DocumentRepository documentRepository;*/
 
     public PeopleController(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
 
-    @GetMapping("/peoples/")
+    @GetMapping("/documentsTables/peoples/")
     public List<People> ListPeople() {
         Iterable<People> peopleIterable = peopleRepository.findAll();
 
@@ -54,7 +55,9 @@ public class PeopleController {
         return newPeople.getId();
     }
 
-    @GetMapping("/peoples/{id}")
+
+
+    @GetMapping("/documentsTables/peoples/{id}")
     public ResponseEntity<?> getPeople(@PathVariable int id) {
         Optional<People> optionalPeople = peopleRepository.findById(id);
         if (!optionalPeople.isPresent()) {
@@ -63,7 +66,7 @@ public class PeopleController {
         return new ResponseEntity<>(optionalPeople.get(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/peoples/{id}")
+    @DeleteMapping("/documentsTables/peoples/{id}")
     public ResponseEntity<?> dellPeople(@PathVariable int id) {
         Optional<People> optionalPeople = peopleRepository.findById(id);
         if (!optionalPeople.isPresent()) {
@@ -73,7 +76,7 @@ public class PeopleController {
         return new ResponseEntity<>(peopleRepository.count(), HttpStatus.OK);
     }
 
-    @PutMapping("/peoples/{id}")
+    @PutMapping("/documentsTables/peoples/{id}")
     @ResponseBody
     public ResponseEntity<?> putPeopleId(People newPeople, @PathVariable int id) {
         Optional<People> optionalPeople = peopleRepository.findById(id);
@@ -87,7 +90,7 @@ public class PeopleController {
         return new ResponseEntity<>(modifiedPeople, HttpStatus.OK);
     }
 
-    @DeleteMapping("/peoples/")
+    @DeleteMapping("/documentsTables/peoples/")
     public ResponseEntity dellAllPeoples() {
         if (peopleRepository.count() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The list is already empty.");

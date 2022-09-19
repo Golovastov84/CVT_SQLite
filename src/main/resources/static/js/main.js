@@ -1,170 +1,150 @@
 $(function(){
 
-    var numberClick = 0;
-    let controlClick = [];
+var documents_Name_Id = '';
+var last_Name_Id = '';
+var people_id_fom_document = '';
+//var people;
 
-    const appendPeople = function(data){
-        var peopleCode = '<a href="#" class="people-link" data-id="' +
-            data.id + '">' + data.lastName + '</a><br>';
-        $('#people-list')
-            .append('<div>' + peopleCode + '</div>');
-
-        var documentCode = '<a href="#" class="document-link" data-id="' +
-                    data.id + '">' + data.dateDocument + '</a><br>';
-        $('#document-list')
-              .append('<div>' + documentCode + '</div>');
-
+const appendTypeDocument = function(data){
+        var typeDocumentCode = '<a href="#" class="type-document-link" data-id="' +
+            data.id + '">' + data.name + '</a><br>';
+        $('#type-document-list')
+            .append('<div>' + typeDocumentCode + '</div>');
     };
-
-    //Loading peoples on load page
-//    $.get('/peoples/', function(response)
-//    {
-//        for(i in response) {
-//            appendPeople(response[i]);
-//        }
-//    });
-
-    //Show adding people form
-    $('#show-add-people-form').click(function(){
-        $('#people-form').css({display: 'flex'});
-    });
-
-//Closing adding people form
-    $('#people-form').click(function(event){
-        if(event.target === this) {
-            $(this).css({display: 'none'});
-//            location.reload();
-        }
-    });
-
-    $('#people-put-form').click(function(event){
-        if(event.target === this) {
-            $(this).css({display: 'none'});
-//            location.reload();
-        }
-    });
-
-    //Getting people
-    $(document).on('click', '.people-link', function(){
-        var link = $(this);
-        var peopleId = link.data('id');
-
-        $.ajax({
-            method: "GET",
-            url: '/peoples/' + peopleId,
-            success: function(response)
-            {
-                     if(!controlClick.includes(peopleId)){
-                    var code = '<div class="people-one"><span>Дата рождения: ' + response.birthday +
-                    '</span><p></p><button class="put-people" data-id="' + peopleId +
-                    '">Редактировать</button><p></p><button class="dell-people" data-id="' + peopleId +
-                    '">Удалить</button></div>';
-                    link.parent().append(code);
-                    controlClick.push(peopleId);
-                   }
-                 $('.put-people').click(function(){
-                   $('#people-put-form > form').html('');
-                   let fillingPeoplePutForm = '<h2>Редактирование данных о человеке</h2>';
-                   fillingPeoplePutForm += '<p><label>Фамилия </label>';
-                   fillingPeoplePutForm += '<input type="text" name="lastName" value="' + response.lastName +
-                   '"></p>';
-                   fillingPeoplePutForm += '<p><label>Имя </label>';
-                   fillingPeoplePutForm += '<input type="text" name="firstName" value="' + response
-                   .firstName + '"></p>';
-                   fillingPeoplePutForm += '<p><label>Отчество </label>';
-                   fillingPeoplePutForm += '<input type="text" name="patronymic" value="' + response
-                   .patronymic + '"></p>';
-                   fillingPeoplePutForm += '<p><label>Год рождения </label>';
-                   fillingPeoplePutForm += '<input type="text" name="yearBirthday" value="' + response
-                   .yearBirthday + '"></p>';
-                   fillingPeoplePutForm += '<p><label>Месяц рождения </label>';
-                   fillingPeoplePutForm += '<input type="text" name="monthBirthday" value="' + response
-                   .monthBirthday + '"></p>';
-                   fillingPeoplePutForm += '<p><label>День рождения </label>';
-                   fillingPeoplePutForm += '<input type="text" name="dayBirthday" value="' + response
-                   .dayBirthday + '"></p>';
-                   fillingPeoplePutForm += '<p><label>Пол</label>';
-                   fillingPeoplePutForm += '<input type="text" name="sex" value="' + response
-                   .sex + '"></p>';
-                   fillingPeoplePutForm += '<hr><button id="put-people-save" data-id="' + peopleId +
-                   '">Редактировать</button>';
-                   $('#people-put-form > form').append(fillingPeoplePutForm);
-                   $('#people-put-form').css({display: 'flex'});
-                   $('#put-people-save').click(function()
-                       {
-                           var data = $('#people-put-form form').serialize();
-                           var link = $(this);
-                           var peopleId = link.data('id');
-                           $.ajax({
-                               method: "PUT",
-                               url: '/peoples/' + peopleId,
-                               data: data,
-                               success: function(response)
-                               {
-                                   $('#people-put-form').css('display', 'none');
-                                   var people = {};
-                                   people.id = response;
-                                   var dataArray = $('#people-put-form form').serializeArray();
-                                   for(i in dataArray) {
-                                       people[dataArray[i]['header']] = dataArray[i]['value'];
-                                   }
-                                document.location.reload();
-                                   appendPeople(people);
-                               }
-                           });
-                           return false;
-                       });
-                });
-
-                $('.dell-people').click(function(){
-                   var link = $(this);
-                   var peopleId = link.data('id');
-                   $.ajax({
-                       method: "DELETE",
-                       url: '/peoples/' + peopleId,
-                       success: function(response)
-                      {
-                       document.location.reload();
-                       }
-                   });
-                   return false;
-                });
-            },
-            error: function(response)
-            {
-                if(response.status == 404) {
-                    alert('Человек не найден!');
-                }
-            }
-        });
-        return false;
-
-    });
-
 
 
     //Adding People
     $('#save-people').click(function()
     {
+
         var data = $('#people-form form').serialize();
         $.ajax({
+
             method: "POST",
             url: '/peoples/',
             data: data,
             success: function(response)
             {
-                $('#people-form').css('display', 'none');
-                var people = {};
+               var people = {};
                 people.id = response;
+//          получение id people
+                document.getElementById('idPeopleForDocument').value = response;
                 var dataArray = $('#people-form form').serializeArray();
                 for(i in dataArray) {
                     people[dataArray[i]['header']] = dataArray[i]['value'];
                 }
-                appendPeople(people);
-                document.location.reload();
+//                appendPeople(people);
             }
         });
+        // обновляет и текущую
+        $('#people-form').css({display: 'none'});
+//       заполнение типа документа
+        $('#document-form').css({display: 'flex'});
+        last_Name_Id = document.getElementById('lastNameId').value;
         return false;
+
     });
 
+
+    // переход на страницу просмотра списка людей
+    $('#document-link', '#viewing-list-of-people').click(function(){
+           window.location.href = 'documentsTables';
+            return false;
+        });
+
+//   выбор типа документа и переход к заполнению документа
+    $('#filling-document').click(function(){
+//   надо добавить post запрос добавления типа документа
+        var data = $('#document-form form').serialize();
+        $.ajax({
+            method: "POST",
+            url: '/typeDocuments/',
+            data: data,
+            success: function(response)
+            {
+               var typeDocument = {};
+                typeDocument.id = response;
+//          получение id typeDocument
+                document.getElementById('idTypeDocument').value = response;
+                var dataArray = $('#document-form form').serializeArray();
+                for(i in dataArray) {
+                    typeDocument[dataArray[i]['header']] = dataArray[i]['value'];
+                }
+            }
+        });
+//      заполнение типа документа
+        $('#document-form').css({display: 'none'});
+//    document.getElementById("seriesDoc").value = "345";
+//  извлечение данных
+        documents_Name_Id = document.getElementById('documentsNameId').value;
+        document.getElementById('idPeopleInDocument').value = document.getElementById('idPeopleForDocument').value;
+        document.getElementById('documentsNameDocId').value = documents_Name_Id;
+        document.getElementById('firstNameDocId').value = last_Name_Id;
+        $('#document-filling-form').css({display: 'flex'});
+        return false;
+        });
+
+
+
+//      добавление нового человека
+        $('#add-new-person').click(function(){
+                $('#document-filling-form').css({display: 'none'});
+                $('#people-form').css({display: 'flex'});
+//                document.location.reload();
+                location.reload();
+                return false;
+        });
+
+//      сохранение документа save-document
+        $('#save-document').click(function()
+            {
+//document-filling-form
+                var data = $('#document-filling-form form').serialize();
+        //        var peopleData = $('#people-form form');
+                $.ajax({
+
+                    method: "POST",
+                    url: '/documents/',
+                    data: data,
+                    success: function(response)
+                    {
+                        var document = {};
+                        document.id = response;
+                        var dataArray = $('#document-filling-form form').serializeArray();
+                        for(i in dataArray) {
+                            document[dataArray[i]['header']] = dataArray[i]['value'];
+                        }
+//                        appendPeople(people);
+                    }
+                });
+        // обновляет и текущую
+                $('#document-filling-form').css({display: 'none'});
+        //       заполнение типа документа
+                 document.getElementById('documentsNameId').value = "";
+                $('#document-form').css({display: 'flex'});
+                return false;
+            });
+
+
+
+    /*$(document).on('click', '#filling-document', function(){
+        var link = $(this);
+
+        var peopleId = peopleData.data('id');
+        $.ajax({
+            method: "GET",
+            url: '/peoples/' + peopleId,
+            success: function(response)
+            {
+               var code = '<h2>Добавление документа</h2><label>Название документа</label><input type="text"
+               name="documentsName" value=""><p></p><label>ID Человека</label><input type="text"
+               name="peopleId" value="' + response.id + '"><p></p>';
+              link.parent().append(code);
+            },
+               $('#document-form').css({display: 'none'});
+               // open add for document
+               $('#document-filling-form').css({display: 'flex'});
+                return false;
+            });
+        });*/
 });
