@@ -29,7 +29,7 @@ public class DocumentController {
         this.documentRepository = documentRepository;
     }
 
-    @GetMapping("/documentsTables/documents/")
+    @GetMapping("/documentsTables/documents")
     public List<Document> ListDocument() {
         Iterable<Document> documentIterable = documentRepository.findAll();
 

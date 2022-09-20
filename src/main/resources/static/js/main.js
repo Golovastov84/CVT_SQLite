@@ -7,10 +7,11 @@ var people_id_fom_document = '';
 
 const appendTypeDocument = function(data){
         var typeDocumentCode = '<a href="#" class="type-document-link" data-id="' +
-            data.id + '">' + data.name + '</a><br>';
+            data.id + data.name + '">' + data.name + '</a><br>';
         $('#type-document-list')
             .append('<div>' + typeDocumentCode + '</div>');
     };
+
 
 
     //Adding People
@@ -45,12 +46,19 @@ const appendTypeDocument = function(data){
 
     });
 
-
-    // переход на страницу просмотра списка людей
-    $('#document-link', '#viewing-list-of-people').click(function(){
+// переход на страницу просмотра списка людей
+    $('.document-link').click(function(){
            window.location.href = 'documentsTables';
             return false;
         });
+
+//  вывод всех типов документов
+   /* $.get('/typeDocuments/', function(response)
+    {
+        for(i in response) {
+            appendTypeDocument(response[i]);
+        }
+    });*/
 
 //   выбор типа документа и переход к заполнению документа
     $('#filling-document').click(function(){
@@ -84,6 +92,18 @@ const appendTypeDocument = function(data){
         return false;
         });
 
+// Выбор типа документа из предложенных
+    $(document).on('click', '.type-document-link', function(){
+        var link = $(this);
+        var typeDocumentId = link.data('id');
+        $('#document-form').css({display: 'none'});
+        document.getElementById('idTypeDocument').value = typeDocumentId;
+        document.getElementById('documentsNameDocId').value = link.data('name');
+        document.getElementById('firstNameDocId').value = last_Name_Id;
+        document.getElementById('idPeopleInDocument').value = document.getElementById('idPeopleForDocument').value;
+        $('#document-filling-form').css({display: 'flex'});
+         return false;
+    });
 
 
 //      добавление нового человека

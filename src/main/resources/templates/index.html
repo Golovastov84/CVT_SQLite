@@ -29,9 +29,10 @@
 <!--            <a href="#">-->
             <button id="save-people">Добавить</button>
 <!--            </a>-->
-            <a href="documentsTables">
-                <button id="document-link">Просмотр документов</button>
-            </a>
+<!--            <a href="documentsTables">-->
+<!--            <a href="#">-->
+                <button class="document-link">Просмотр документов</button>
+<!--            </a>-->
         </form>
     </div>
 
@@ -45,7 +46,8 @@
 
             <div id="type-document-list">
                 <div th:each="typeDocument : ${typeDocuments}">
-                    <a href="#" class="type-document-link" th:attr="data-id=${typeDocument.id}"
+                    <a href="#" class="type-document-link"
+                       th:attr="data-id=${typeDocument.id}, data-name=${typeDocument.name}"
                        th:text="${typeDocument.name}"></a>
                 </div>
             </div>
@@ -54,7 +56,7 @@
             <hr>
             <button id="filling-document">Заполнить документ</button><p></p>
             <button id="doc-add-new-person">Добавить нового человека</button><p></p>
-            <button id="doc-viewing-list-of-people">Просмотр списка людей</button>
+            <button class="document-link">Просмотр списка людей</button>
         </form>
         <input type="hidden" id="idPeopleForDocument" value="">
     </div>
@@ -79,10 +81,9 @@
             <h2>Заполнение документа</h2>
             <label>Название документа</label>
             <input type="text" name="documentsNameDoc" id="documentsNameDocId" value=""><p></p>
+            <input type="hidden" name="typeId" id="idTypeDocument" value="">
             <label>Фамилия человека</label>
             <input type="text" name="firstNameDoc" id="firstNameDocId" value=""><p></p>
-            <input type="hidden" name="typeId" id="idTypeDocument" value="">
-
             <input type="hidden" name="peopleId" id="idPeopleInDocument" value="">
             <label>Серийный номер</label>
             <input type="text" name="series" id="seriesId" value=""><p></p>
@@ -97,7 +98,7 @@
             <hr>
             <button id="save-document">Сохранить документ</button><p></p>
             <button id="add-new-person">Добавить нового человека</button><p></p>
-            <button id="viewing-list-of-people">Просмотр списка людей</button>
+            <button class="document-link">Просмотр списка людей</button>
 
         </form>
     </div>
