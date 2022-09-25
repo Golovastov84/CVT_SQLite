@@ -88,6 +88,13 @@ public class Storage {
         return null;
     }
 
+    public static Document getDocumentForPeople(int peopleId) {
+        if (documents.containsKey(peopleId)) {
+            return documents.get(peopleId);
+        }
+        return null;
+    }
+
     public static TypeDocument getTypeDocument(int typeDocumentId) {
         if (typeDocuments.containsKey(typeDocumentId)) {
             return typeDocuments.get(typeDocumentId);

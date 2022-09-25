@@ -12,7 +12,8 @@
         <form id="people-form-data">
             <h2>Добавление человека</h2>
             <label>Фамилия</label>
-            <input type="text" name="lastName" id="lastNameId" value=""><p></p>
+            <!--pattern="^[ЁА-ЯA-Z][а-яёa-z-]*$" title="4 to 8 lowercase letters"-->
+            <input type="text" name="lastName"  id="lastNameId" value=""><p></p>
             <label>Имя</label>
             <input type="text" name="firstName" id="firstNameId" value=""><p></p>
             <label>Отчество</label>
@@ -43,7 +44,6 @@
         <form>
             <h2>Выбор типа документа</h2>
             <label>Выберите из имеющихся,</label>
-
             <div id="type-document-list">
                 <div th:each="typeDocument : ${typeDocuments}">
                     <a href="#" class="type-document-link"

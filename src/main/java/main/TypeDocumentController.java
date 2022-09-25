@@ -56,7 +56,7 @@ public class TypeDocumentController {
 
     // Проблема в получении объекта из базы данных, при вновь созданном объекте ошибка не выходит
     // надо получить объект из people
-    @GetMapping("/typeDocuments/{id}")
+    @GetMapping("/documentsTables/typeDocuments/{id}")
     public ResponseEntity<?> getTypeDocument(@PathVariable int id) {
         Optional<TypeDocument> optionalTypeDocument = typeDocumentRepository.findById(id);
         if (!optionalTypeDocument.isPresent()) {

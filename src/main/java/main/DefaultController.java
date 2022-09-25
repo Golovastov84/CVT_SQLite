@@ -80,7 +80,7 @@ public class DefaultController {
         modelDoc.addAttribute("peoples", peoples);
         modelDoc.addAttribute("peoplesCount", peoples.size());
         modelDoc.addAttribute("someParameter", someParameter);
-        modelDoc.addAttribute("documents", documents);
+//        modelDoc.addAttribute("documents", documents);
         return "documentsTables";
     }
 }

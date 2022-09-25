@@ -19,72 +19,63 @@ $(function(){
             .append('<div>' + peopleCode + '</div>');
         $('#people-list').append('<div>' + agePeople + '</div>');
         /*var addName = '<div> ' + data.firstName + ' ' + data.patronymic + ' Возраст: </div>';
-
         $('#people-list')
                     .append(addName);*/
     };
 
-     $.get('/documentsTables/peoples/', function(response)
-        {
-            for(i in response) {
-                appendPeople(response[i]);
-            }
-        });
+    /*const appendDocument = function(data){
+            var documentCode = '<a href="#" class="type-document-link" data-id="' +
+                data.id + data.typeId'">' + data.typeId + '</a><br>';
+            $('#type-document-list-people')
+                .append('<div>' + documentCode + '</div>');
+        };*/
 
-    function _calculateAge(birthday) { // birthday is a date
-        var ageDifMs = Date.now() - birthday.getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
 
-    const appendDocument = function(data){
 
-            var documentCode = '<a href="#" class="document-link-doc" data-id="' +
-                        data.id + '">' + data.peopleId + '</a><br>';
-            $('#document-list')
-                  .append('<div>' + documentCode + '</div>');
-        };
-
-    $(document).on('click', '.document-link-doc', function(){
+    // Выбор человека
+        $(document).on('click', '.people-link', function(){
             var link = $(this);
-            var documentId = link.data('id');
+            var peopleId = link.data('id');
+            $('#people-block').css({display: 'none'});
 
-            $.ajax({
+        $.ajax({
                 method: "GET",
-                url: '/documentsTables/documents/' + documentId,
+                url: '/documentsTables/' + peopleId,
                 success: function(response)
                 {
-//                     if(!controlClick.includes(documentId)){
-                var code = '<div class="document-one"><span>Номер документа: ' + response.typeId +
-                '</span><p></p><button class="put-document" data-id="' + documentId +
-                '">Редактировать</button><p></p><button class="dell-document" data-id="' + documentId +
-                '">Удалить</button></div>';
-                link.parent().append(code);
-//                    controlClick.push(documentId);
-    //                   }
-                $('.dell-document').click(function(){
-                                   var link = $(this);
-                                   var documentId = link.data('id');
-                                   $.ajax({
-                                       method: "DELETE",
-                                       url: '/documents/' + documentId,
-                                       success: function(response)
-                                      {
-                                       document.location.reload();
-                                       }
-                                   });
-                                   return false;
-                                });
+//                    var code = '';
+                    for (var document of response) {
+                    var nameDocument = '';
+                    var documentTypeId = document.typeId;
+                    $.ajax({
+                        method: "GET",
+                        url: '/documentsTables/typeDocuments/' + documentTypeId,
+                        success: function(response)
+                        {
+                        nameDocument = response.name;
+                         var code = '<a href="#" class="type-document-link" data-id="' + document.id + document
+                                             .typeId + '">' + nameDocument + '</a><br>';
+                         $('#type-document-list-people').append('<div>' + code + '</div>');
+                        },
+                        error: function(response)
+                            {
+                                if(response.status == 404) {
+                                    alert('Тип документа не найден!');
+                                }
+                            }
+                    });
+
+                    }
+                     $('#people-list-documents').css({display: 'flex'});
                 },
                 error: function(response)
-                {
-                    if(response.status == 404) {
-                        alert('Документ не найден!');
+                    {
+                        if(response.status == 404) {
+                            alert('Документы не найдены!');
+                        }
                     }
-                }
-            });
-                   return false;
-
-               });
+                });
+             return false;
+        });
 
  });

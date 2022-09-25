@@ -85,6 +85,22 @@ public class DocumentController {
         return new ResponseEntity<>(optionalDocument.get(), HttpStatus.OK);
     }
 
+
+    @GetMapping("/documentsTables/{peopleId}")
+    public ResponseEntity<List<Document>> getDocumentForPeople(@PathVariable int peopleId) {
+        Iterable<Document> documentIterable  = documentRepository.findAll();
+        ArrayList<Document> documents = new ArrayList<>();
+        for (Document document : documentIterable) {
+            if(document.getPeopleId() == peopleId) {
+                documents.add(document);
+            }
+        }
+        if (documents.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return new ResponseEntity<>(documents, HttpStatus.OK);
+    }
+
     @DeleteMapping("/documentsTables/documents/{id}")
     public ResponseEntity<?> dellDocument(@PathVariable int id) {
         Optional<Document> optionalDocument = documentRepository.findById(id);

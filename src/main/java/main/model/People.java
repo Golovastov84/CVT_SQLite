@@ -16,6 +16,18 @@ public class People {
     @Column(name = "id")
     private int id;
 
+   /* @OneToMany(mappedBy = "people", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Document> documents = new HashSet<>();
+
+    public  void  addDocument(Document document){
+        documents.add(document);
+        document.setPeople(this);
+    }
+    public void removeDocument(Document document){
+        documents.remove(document);
+        document.setPeople(null);
+    }*/
+
     @Column(name = "last_name")
     private String lastName;
 
