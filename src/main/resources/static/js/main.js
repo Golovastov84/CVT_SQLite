@@ -23,34 +23,24 @@ const appendTypeDocument = function(data){
         $('#type-document-list').append('<div>' + typeDocumentCode + '</div>');
     };
 
-//  вывод всех типов документов
-    /*$.get('/typeDocuments/', function(response)
-    {
-        for(i in response) {
-            appendTypeDocument(response[i]);
-        }
-    });*/
 
-    //Adding People
+
+//Adding People
     $('#save-people').click(function()
     {
 // проверка ввода ФИО
-// regexFIO
          var lastNameIdIf = document.getElementById('lastNameId').value;
         var firstNameIdIf = document.getElementById('firstNameId').value;
         var patronymicIdIf = document.getElementById('patronymicId').value;
         var peopleFIOBoolean = regexFIO.test(lastNameIdIf) && regexFIO.test(firstNameIdIf) && regexFIO.test
         (patronymicIdIf);
 // проверка даты
-
-
         var yearBirthdayIdIf = document.getElementById('yearBirthdayId').value;
         var monthBirthdayIdIf = document.getElementById('monthBirthdayId').value;
         var dayBirthdayIdIf = document.getElementById('dayBirthdayId').value;
         var peopleBirthdayRegexBoolean = regexDate.test(yearBirthdayIdIf) && regexDate.test(monthBirthdayIdIf)
         && regexDate.test(dayBirthdayIdIf) && checkDate(yearBirthdayIdIf, monthBirthdayIdIf, dayBirthdayIdIf);
         var peopleYearBoolean = yearBirthdayIdIf > 1900 && yearBirthdayIdIf <= nowYearForPeople;
-
         var peopleManWomanIdIf = document.getElementById('sexId').value;
         var peopleManWomanRegexBoolean = regexManWoman.test(peopleManWomanIdIf);
         if(!peopleFIOBoolean){
@@ -94,9 +84,9 @@ const appendTypeDocument = function(data){
                 }
             }
         });
-        // обновляет и текущую
+// обновляет и текущую
         $('#people-form').css({display: 'none'});
-//       заполнение типа документа
+//заполнение типа документа
         $('#document-form').css({display: 'flex'});
         last_Name_Id = document.getElementById('lastNameId').value;
         return false;
@@ -113,19 +103,11 @@ const appendTypeDocument = function(data){
     $('#filling-document').click(function(){
     var typeDocumentIdIf = document.getElementById('documentsNameId').value;
     var typeDocumentNullBoolean = typeDocumentIdIf == '';
-//    var typeDocumentRepeatBoolean = document.getElementById('type-document-list').includes(typeDocumentIdIf);
-//    var typeDocumentRepeatBoolean = false;
     var typeDocumentHtmlCollections = document.getElementsByClassName('type-document-link');
-
     if(typeDocumentNullBoolean){
         alert("Введите своё название типа документа, или выберете из имеющихся в базе.");
         return false;
-    } else
-   /*if(typeDocumentRepeatBoolean){
-        alert("Ввели документ уже имеющийся в базе.");
-        return false;
-    }
-    else */{
+    } else {
     var matchFound = false;
     for (let i = 0; i < typeDocumentHtmlCollections.length; i++) {
           if(typeDocumentHtmlCollections.item(i).textContent == typeDocumentIdIf){
@@ -181,7 +163,6 @@ const appendTypeDocument = function(data){
         $('#add-new-person').click(function(){
                 $('#document-filling-form').css({display: 'none'});
                 $('#people-form').css({display: 'flex'});
-//                document.location.reload();
                 location.reload();
                 return false;
         });
@@ -193,7 +174,6 @@ const appendTypeDocument = function(data){
             var seriesDocumentRegexBoolean = regexSeriesDocument.test(seriesDocumentIdIf);
             var numberDocumentIdIf = document.getElementById('numberId').value;
             var numberDocumentRegexBoolean = regexNumberDocument.test(numberDocumentIdIf);
-
             var yearIssueDocumentIdIf = document.getElementById('yearDateId').value;
             var monthIssueDocumentIdIf = document.getElementById('monthDate').value;
             var dayIssueDocumentIdIf = document.getElementById('dayDate').value;
@@ -212,7 +192,6 @@ const appendTypeDocument = function(data){
                 alert("Неравильный формат ввода номера документа.");
                 return false;
                 } else
-
             if(!issueDocumentRegexBoolean){
                 alert("Неравильный формат ввода года 1900, месяца 1, дня 1 оформления документа.");
                 return false;
@@ -232,9 +211,7 @@ const appendTypeDocument = function(data){
             } else
 
             {
-//document-filling-form
                 var dataDoc = $('#document-filling-form form').serialize();
-        //        var peopleData = $('#people-form form');
                 $.ajax({
                     method: "POST",
                     url: '/documents/',
@@ -247,18 +224,16 @@ const appendTypeDocument = function(data){
                         for(i in dataArray) {
                             document[dataArray[i]['header']] = dataArray[i]['value'];
                         }
-//                        appendPeople(people);
                     }
                 });
-        // обновляет и текущую
-
+// обновляет и текущую
                 $('#document-filling-form').css({display: 'none'});
                 document.getElementById('seriesId').value = "";
                 document.getElementById('numberId').value = "";
                 document.getElementById('yearDateId').value = "";
                 document.getElementById('monthDate').value = "";
                 document.getElementById('dayDate').value = "";
-        //       заполнение типа документа
+//заполнение типа документа
                  document.getElementById('documentsNameId').value = "";
                 $('#document-form').css({display: 'flex'});
                 return false;

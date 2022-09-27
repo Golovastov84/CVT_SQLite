@@ -9,12 +9,11 @@
 </head>
 <body>
 <div id="people-block">
-    <div>
+    <div id="prime-form">
 <h1>Список людей (<span th:text="${peoplesCount}">0</span>)</h1>
 <a href="/">
 <button id="show-add-people-form">Добавить человека</button>
 </a>
-<br><br>
     </div>
 <div id="people-list">
     <div th:each="people : ${peoples}">
@@ -28,23 +27,44 @@
 <div id="people-list-documents">
     <form>
         <h2>Список документов у:</h2>
+        <!--<input type="text" name="peopleFIO" id="people-FIO" value="">-->
         <label id="people-FIO"></label>
-        <div id="type-document-list-people">
+        <div id="type-document-list-people"><br>
             <div th:each="document : ${documents}">
                 <a href="#" class="type-document-link"
-                   th:attr="data-id=${document.id}, data-name=${document.typeId}"
+                   th:attr="data-id=${document.id}"
                    ></a>
             </div>
         </div>
+        <button class="document-link-for-list">Просмотр списка людей</button>
     </form>
 </div>
 
-<!--<br><br>
-<div id="document-list">
-    <div th:each="document : ${documents}">
-        <a href="#" class="document-link-doc" th:attr="data-id=${document.id}"
-           th:text="${document.peopleId}"></a>
-    </div>
-</div>-->
+<div id="list-documents">
+    <form>
+        <h2>Документ на имя</h2>
+        <label id="people-FIO-for-document"></label><p></p>
+        <label>Название документа</label>
+        <input type="text" name="documentsNameDoc" id="documentsNameDocId" value=""><p></p>
+        <input type="hidden" name="idDocument" id="idDocument" value="">
+        <input type="hidden" name="typeId" id="idTypeDocument" value="">
+        <input type="hidden" name="peopleId" id="idPeopleInDocument" value="">
+        <label>Серийный номер</label>
+        <input type="text" name="series" id="seriesId" value=""><p></p>
+        <label>Номер</label><p></p>
+        <input type="text" name="number" id="numberId" value=""><p></p>
+        <label>Год выдачи документа</label>
+        <input type="text" name="yearDate" id="yearDateId" value=""><p></p>
+        <label>Месяц выдачи документа</label>
+        <input type="text" name="monthDate" id="monthDate" value=""><p></p>
+        <label>День выдачи документа</label>
+        <input type="text" name="dayDate" id="dayDate" value=""><p></p>
+        <hr>
+        <p></p>
+        <button class="view-another-document">Просмотр другого вашего документа</button>
+        <button class="document-link">Просмотр списка людей</button>
+
+    </form>
+</div>
 </body>
 </html>
