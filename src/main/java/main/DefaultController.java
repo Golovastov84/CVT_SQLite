@@ -2,6 +2,7 @@ package main;
 
 import main.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +29,29 @@ public class DefaultController {
         ArrayList<People> peoples = new ArrayList<>();
         ArrayList<TypeDocument> typeDocuments = new ArrayList<>();
         for(People people : peopleIterable){
+//            people.setSex("ж");
+            /*people.setBirthday(people.getYearBirthday(), people.getMonthBirthday(),
+                    people.getDayBirthday());*/
             peoples.add(people);
         }
         for(TypeDocument typeDocument : typeDocumentIterable){
             typeDocuments.add(typeDocument);
         }
+
+       /* Iterable<Document> documentIterable = documentRepository.findAll();
+        ArrayList<Document> documents = new ArrayList<>();
+        for(Document document : documentIterable){
+            document.setDateDocument(document.getYearDate(), document.getMonthDate(),
+                    document.getDayDate());
+            documentRepository.save(document);
+            documents.add(document);
+        }
+
+        model.addAttribute("documents", documents);*/
         model.addAttribute("peoples", peoples);
         model.addAttribute("typeDocuments", typeDocuments);
         model.addAttribute("peoplesCount", peoples.size());
+
         return "index";
     }
 
@@ -44,6 +60,7 @@ public class DefaultController {
         Iterable<People> peopleIterable = peopleRepository.findAll();
         ArrayList<People> peoples = new ArrayList<>();
         for(People people : peopleIterable){
+//            people.setSex("ж");
             people.setBirthday(people.getYearBirthday(), people.getMonthBirthday(),
                     people.getDayBirthday());
             peoples.add(people);
@@ -60,6 +77,8 @@ public class DefaultController {
 
         modelDoc.addAttribute("peoples", peoples);
         modelDoc.addAttribute("peoplesCount", peoples.size());
+
+//        modelDoc.addAttribute("documents", documents);
         return "documentsTables";
     }
 }

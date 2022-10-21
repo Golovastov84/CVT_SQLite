@@ -27,15 +27,16 @@
 <div id="people-list-documents">
     <form>
         <h2>Список документов у:</h2>
+        <!--<input type="text" name="peopleFIO" id="people-FIO" value="">-->
         <label id="people-FIO"></label>
         <div id="type-document-list-people"><br>
             <div th:each="document : ${documents}">
-                <a href="#" class="type-document-link"
+                <a href="#" class="type-viewing-list-people"
                    th:attr="data-id=${document.id}"
                    ></a>
             </div>
         </div>
-        <button class="document-link-for-list">Просмотр списка людей</button>
+        <button class="viewing-list-people-for-list">Просмотр списка людей</button>
     </form>
 </div>
 
@@ -61,7 +62,8 @@
         <hr>
         <p></p>
         <button class="view-another-document">Просмотр другого вашего документа</button>
-        <button class="document-link">Просмотр списка людей</button>
+        <button class="viewing-list-people">Просмотр списка людей</button>
+
     </form>
 </div>
 </body>

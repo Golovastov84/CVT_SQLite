@@ -1,5 +1,7 @@
 package main;
 
+import main.model.Document;
+import main.model.DocumentRepository;
 import main.model.People;
 import main.model.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//@RestController
 @Controller
 public class PeopleController {
 
     @Autowired
     private PeopleRepository peopleRepository;
+
+   /* @Autowired
+    private DocumentRepository documentRepository;*/
 
     public PeopleController(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
@@ -37,11 +43,19 @@ public class PeopleController {
     @ResponseBody
     public int addPeople(People people) {
         if (peopleRepository.count() == 0) {
+//            System.out.println(people.getId());
+            // поправить на 1
             people.setId(1);
         }
+        // проверить ниже код
+//        People newPeople = peopleRepository.save(people);
+
         People newPeople = peopleRepository.save(putBirthday(people));
+
         return newPeople.getId();
     }
+
+
 
     @GetMapping("/documentsTables/peoples/{id}")
     public ResponseEntity<?> getPeople(@PathVariable int id) {
@@ -71,6 +85,7 @@ public class PeopleController {
         }
        // нужен код перезаписи
         People modifiedPeople = putBirthday(newPeople);
+//        peopleRepository.deleteById(newPeople.getId());
         peopleRepository.save(modifiedPeople);
         return new ResponseEntity<>(modifiedPeople, HttpStatus.OK);
     }

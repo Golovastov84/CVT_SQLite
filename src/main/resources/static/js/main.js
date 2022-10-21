@@ -18,7 +18,7 @@ const regexNumberDocument = /^[0-9]+$/;
 
 
 const appendTypeDocument = function(data){
-        var typeDocumentCode = '<a href="#" class="type-document-link" data-id="' +
+        var typeDocumentCode = '<a href="#" class="type-viewing-list-people" data-id="' +
             data.id + data.name + '">' + data.name + '</a><br>';
         $('#type-document-list').append('<div>' + typeDocumentCode + '</div>');
     };
@@ -103,7 +103,7 @@ const appendTypeDocument = function(data){
     $('#filling-document').click(function(){
     var typeDocumentIdIf = document.getElementById('documentsNameId').value;
     var typeDocumentNullBoolean = typeDocumentIdIf == '';
-    var typeDocumentHtmlCollections = document.getElementsByClassName('type-document-link');
+    var typeDocumentHtmlCollections = document.getElementsByClassName('type-viewing-list-people');
     if(typeDocumentNullBoolean){
         alert("Введите своё название типа документа, или выберете из имеющихся в базе.");
         return false;
@@ -146,7 +146,7 @@ const appendTypeDocument = function(data){
         });
 
 // Выбор типа документа из предложенных
-    $(document).on('click', '.type-document-link', function(){
+    $(document).on('click', '.type-viewing-list-people', function(){
         var link = $(this);
         var typeDocumentId = link.data('id');
         $('#document-form').css({display: 'none'});

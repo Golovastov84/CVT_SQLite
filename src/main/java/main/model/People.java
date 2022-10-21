@@ -1,8 +1,11 @@
 package main.model;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "people")
@@ -12,6 +15,18 @@ public class People {
     @GeneratedValue(strategy = GenerationType.AUTO) // было  SEQUENCE
     @Column(name = "id")
     private int id;
+
+   /* @OneToMany(mappedBy = "people", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Document> documents = new HashSet<>();
+
+    public  void  addDocument(Document document){
+        documents.add(document);
+        document.setPeople(this);
+    }
+    public void removeDocument(Document document){
+        documents.remove(document);
+        document.setPeople(null);
+    }*/
 
     @Column(name = "last_name")
     private String lastName;
@@ -31,7 +46,21 @@ public class People {
 
     private String sex;
 
+    /*@OneToMany(mappedBy = "peopleId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Document> documents = new HashSet<>();*/
+
+    /*public void addDocument(Document document){
+        documents.add(document);
+        document.setPeople(this);
+    }
+
+    public void removeDocument(Document document){
+        documents.remove(document);
+        document.setPeople(null);
+    }*/
+
     public People() {
+//        birthday = LocalDate.of(yearBirthday, monthBirthday, dayBirthday);
     }
 
     public People(int yearBirthday, int monthBirthday, int dayBirthday) {
@@ -106,6 +135,9 @@ public class People {
         this.birthday = birthday;
     }
 
+    /*public void setDeadline(int yearTask, int monthTask, int dayTask) {
+        this.deadline = LocalDate.of(yearTask, monthTask, dayTask);
+    }*/
 
     public String getSex() {
         return sex;
