@@ -94,7 +94,7 @@ const appendTypeDocument = function(data){
     });
 
 // переход на страницу просмотра списка людей
-    $('.document-link').click(function(){
+    $('.viewing-list-people').click(function(){
            window.location.href = 'documentsTables';
             return false;
         });

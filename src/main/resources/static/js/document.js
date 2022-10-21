@@ -77,7 +77,7 @@ $(function(){
             });
 
 // переход к списку людей
-    $('.document-link').click(function(){
+    $('.viewing-list-people').click(function(){
            $('#list-documents').css({display: 'none'});
            $('#people-block').css({display: 'flex'});
          $('#people-FIO').reset();
