@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@RestController
 @Controller
 public class TypeDocumentController {
 
@@ -30,8 +29,6 @@ public class TypeDocumentController {
     public TypeDocumentController(TypeDocumentRepository typeDocumentRepository) {
         this.typeDocumentRepository = typeDocumentRepository;
     }
-
-//   исправить ниже лежащий код
 
     @GetMapping("/typeDocuments/")
     public List<TypeDocument> ListTypeDocument() {
@@ -54,8 +51,6 @@ public class TypeDocumentController {
         return newTypeDocument.getId();
     }
 
-    // Проблема в получении объекта из базы данных, при вновь созданном объекте ошибка не выходит
-    // надо получить объект из people
     @GetMapping("/documentsTables/typeDocuments/{id}")
     public ResponseEntity<?> getTypeDocument(@PathVariable int id) {
         Optional<TypeDocument> optionalTypeDocument = typeDocumentRepository.findById(id);
@@ -82,7 +77,6 @@ public class TypeDocumentController {
         if (!optionalTypeDocument.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-       // нужен код перезаписи
         TypeDocument modifiedTypeDocument = newTypeDocument;
         typeDocumentRepository.save(modifiedTypeDocument);
         return new ResponseEntity<>(modifiedTypeDocument, HttpStatus.OK);

@@ -12,7 +12,6 @@
         <form id="people-form-data">
             <h2>Добавление человека</h2>
             <label>Фамилия</label>
-            <!--pattern="^[ЁА-ЯA-Z][а-яёa-z-]*$" title="4 to 8 lowercase letters"-->
             <input type="text" name="lastName"  id="lastNameId" value=""><p></p>
             <label>Имя</label>
             <input type="text" name="firstName" id="firstNameId" value=""><p></p>
@@ -27,18 +26,10 @@
             <label>Пол</label>
             <input type="text" name="sex" id="sexId" value="">
             <hr>
-<!--            <a href="#">-->
             <button id="save-people">Добавить</button>
-<!--            </a>-->
-<!--            <a href="documentsTables">-->
-<!--            <a href="#">-->
                 <button class="document-link">Просмотр документов</button>
-<!--            </a>-->
         </form>
     </div>
-
-<!--выбор типа документа-->
-<!--    document type selection-->
 
     <div id="document-form">
         <form>
@@ -60,20 +51,6 @@
         </form>
         <input type="hidden" id="idPeopleForDocument" value="">
     </div>
-
-<!-- было documentsName-->
-<!--    <div id="document-form">-->
-<!--        <form>-->
-<!--            <h2>Добавление документа</h2>-->
-<!--            <label>Название документа</label>-->
-<!--            <input type="text" name="name" id="documentsNameId" value=""><p></p>-->
-<!--            <hr>-->
-<!--            <button id="filling-document">Заполнить документ</button>-->
-<!--        </form>-->
-<!--        <input type="hidden" id="idPeopleForDocument" value="">-->
-<!--    </div>-->
-
-
 
     <div id="document-filling-form">
 
@@ -99,25 +76,7 @@
             <button id="save-document">Сохранить документ</button><p></p>
             <button id="add-new-person">Добавить нового человека</button><p></p>
             <button class="document-link">Просмотр списка людей</button>
-
         </form>
     </div>
-
-
-    <!--<div id="people-put-form">
-        <form>
-        </form>
-    </div>-->
-
-    <!--<div id="document-list">
-<bp></bp>
-            &lt;!&ndash;<a href="documentsTables" class="document-link"
-               >Просмотр документов</a>&ndash;&gt;
-        <a href="#" class="document-link"
-               >Просмотр документов</a>
-        </div>
-    </div>-->
-    <p>Версия сайта:</p>
-    <p th:text="${someParameter}"></p>
 </body>
 </html>

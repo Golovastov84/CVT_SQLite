@@ -6,7 +6,6 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.Hibernate;
 import org.hibernate.type.StringType;
 
 public class SQLDialect extends Dialect {
@@ -30,7 +29,6 @@ public class SQLDialect extends Dialect {
         registerColumnType(Types.BINARY, "blob");
         registerColumnType(Types.VARBINARY, "blob");
         registerColumnType(Types.LONGVARBINARY, "blob");
-        // registerColumnType(Types.NULL, "null");
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
         registerColumnType(Types.BOOLEAN, "integer");
@@ -50,7 +48,6 @@ public class SQLDialect extends Dialect {
     }
 
     public String getIdentityColumnString() {
-        // return "integer primary key autoincrement";
         return "integer";
     }
 
