@@ -1,18 +1,12 @@
 package main.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Objects;
 
 @Entity
 @Table(name = "documents")
 public class Document {
-
-    /*@Autowired
-    PeopleRepository peopleRepository;*/
 
 
     @Id
@@ -20,29 +14,11 @@ public class Document {
     @Column(name = "id")
     private int id;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    private People people;
-    @Override
-    public boolean equals(Object o){
-        if (this == o) return true;
-        if (!(o instanceof Document)) return false;
-        return id != null && id.equals(((Document) o).getId());
-    }
-    @Override
-    public int hashCode(){
-        return getClass().hashCode();
-    }*/
-
     @Column(name = "type_id")
     private int typeId;
 
-   /* // надо получить объект из people
-    @ManyToOne (fetch = FetchType.LAZY)
-//   @JoinColumn(name = "people_id", nullable = true, insertable = true, updatable = true)
-    private People people;*/
 
-    @Column(name = "people_id"/*, insertable = false, updatable = false*/)
-//    @JoinColumn(name = "people_id", nullable = true, insertable = true, updatable = true)
+    @Column(name = "people_id")
     private int peopleId;
 
     private String series;
@@ -61,17 +37,6 @@ public class Document {
     @Column(name = "date")
     private LocalDate dateDocument;
 
-    /*@Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(!(o instanceof Document)) return false;
-        return id != 0 && id == (((Document) o).getId());
-    }
-
-    @Override
-    public int hashCode(){
-        return getClass().hashCode();
-    }*/
 
     public Document() {
     }
@@ -95,33 +60,6 @@ public class Document {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
-
-   /* public People getPeople() {
-        Iterable<People> peopleIterable = peopleRepository.findAll();
-        People people1 = null;
-        for(People people : peopleIterable){
-           if(people.getId() == peopleId){
-               people1 = people;
-           }
-        }
-
-        return people1;
-    }
-
-    public void setPeople(People people) {
-
-        Iterable<People> peopleIterable = peopleRepository.findAll();
-        for(People people1 : peopleIterable){
-            if(!people1.equals(people) && people1.getId() == people.getId()){
-                peopleRepository.deleteById(people1.getId());
-                peopleRepository.save(people);
-                this.people = people;
-            } else {
-                peopleRepository.save(people);
-                this.people = people1;
-            }
-        }
-    }*/
 
     public String getSeries() {
         return series;

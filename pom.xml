@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.springboot</groupId>
-	<artifactId>sqlite</artifactId>
+	<artifactId>CVT_SQLite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sqlite</name>
+	<name>CVT_SQLite</name>
 	<description>Demo project for Spring Boot - SQLite integration</description>
 
     <build>

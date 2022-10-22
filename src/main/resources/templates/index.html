@@ -12,7 +12,6 @@
         <form id="people-form-data">
             <h2>Добавление человека</h2>
             <label>Фамилия</label>
-            <!--pattern="^[ЁА-ЯA-Z][а-яёa-z-]*$" title="4 to 8 lowercase letters"-->
             <input type="text" name="lastName"  id="lastNameId" value=""><p></p>
             <label>Имя</label>
             <input type="text" name="firstName" id="firstNameId" value=""><p></p>
@@ -27,18 +26,10 @@
             <label>Пол</label>
             <input type="text" name="sex" id="sexId" value="">
             <hr>
-<!--            <a href="#">-->
             <button id="save-people">Добавить</button>
-<!--            </a>-->
-<!--            <a href="documentsTables">-->
-<!--            <a href="#">-->
-                <button class="viewing-list-people">Просмотр документов</button>
-<!--            </a>-->
+                <button class="viewing-list-people">Просмотр списка людей</button>
         </form>
     </div>
-
-<!--выбор типа документа-->
-<!--    document type selection-->
 
     <div id="document-form">
         <form>
@@ -46,7 +37,7 @@
             <label>Выберите из имеющихся,</label>
             <div id="type-document-list">
                 <div th:each="typeDocument : ${typeDocuments}">
-                    <a href="#" class="type-viewing-list-people"
+                    <a href="#" class="type-document-link"
                        th:attr="data-id=${typeDocument.id}, data-name=${typeDocument.name}"
                        th:text="${typeDocument.name}"></a>
                 </div>
@@ -61,22 +52,7 @@
         <input type="hidden" id="idPeopleForDocument" value="">
     </div>
 
-<!-- было documentsName-->
-<!--    <div id="document-form">-->
-<!--        <form>-->
-<!--            <h2>Добавление документа</h2>-->
-<!--            <label>Название документа</label>-->
-<!--            <input type="text" name="name" id="documentsNameId" value=""><p></p>-->
-<!--            <hr>-->
-<!--            <button id="filling-document">Заполнить документ</button>-->
-<!--        </form>-->
-<!--        <input type="hidden" id="idPeopleForDocument" value="">-->
-<!--    </div>-->
-
-
-
     <div id="document-filling-form">
-
         <form>
             <h2>Заполнение документа</h2>
             <label>Название документа</label>
@@ -99,12 +75,7 @@
             <button id="save-document">Сохранить документ</button><p></p>
             <button id="add-new-person">Добавить нового человека</button><p></p>
             <button class="viewing-list-people">Просмотр списка людей</button>
-
         </form>
     </div>
-
-
-
-
 </body>
 </html>

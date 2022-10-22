@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class TypeDocument {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)// было  SEQUENCE
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String name;
