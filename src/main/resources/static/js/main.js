@@ -32,8 +32,8 @@ const appendTypeDocument = function(data){
          var lastNameIdIf = document.getElementById('lastNameId').value;
         var firstNameIdIf = document.getElementById('firstNameId').value;
         var patronymicIdIf = document.getElementById('patronymicId').value;
-        var peopleFIOBoolean = regexFIO.test(lastNameIdIf) && regexFIO.test(firstNameIdIf) && regexFIO.test
-        (patronymicIdIf);
+        var peopleFIOBoolean = regexFIO.test(lastNameIdIf) && regexFIO.test(firstNameIdIf) && (regexFIO.test
+        (patronymicIdIf) || patronymicIdIf == '');
 // проверка даты
         var yearBirthdayIdIf = document.getElementById('yearBirthdayId').value;
         var monthBirthdayIdIf = document.getElementById('monthBirthdayId').value;
